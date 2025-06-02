@@ -1,25 +1,28 @@
+[![Guardian OSS](https://img.shields.io/badge/guardian-oss-blue)](https://github.com/loveliiivelaugh/guardian-oss)
+
 # 🧠 `guardian-open`
 
 *A minimal, open-source starter brain for local-first autonomous software systems.*
 
-## Qdrant Memory
-🧙🏼‍♂️ Use this 👉
-```bash
-curl -X PUT http://localhost:6333/collections/memories \
-  -H "Content-Type: application/json" \
-  -d '{
-    "vectors": {
-      "size": 1024,
-      "distance": "Cosine"
-    }
-  }'
-```
+---
 
-### Guardian CLI
-🧙🏼‍♂️ Use this 👉
-```bash
-bun install -g ./services/guardian-cli
-```
+Read [Getting Set Up]()
+Read the [full tutorial series](https://blog.woodwardwebdev.com/the-guardian-tutorial-series) for step-by-step guides on setting up and using Guardian.
+
+---
+
+### 🧱 Included Services
+
+This project is a bundled OSS release of the core Guardian system — a modular, local-first AI infrastructure stack. It includes four key services, each designed to run independently or as part of a unified agentic automation engine.
+
+| Service                                          | Description                                                                                                                                                                                 |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🧠 [`guardian-open`](./src)                      | The main backend server. Handles memory creation, LLM routing, metadata storage, and API orchestration using Bun + Hono + Supabase + Qdrant.                                                |
+| ✍️ [`codegen-worker`](./services/codegen-worker) | A task-triggered microservice that receives input (like feature prompts or TDD test plans), generates production-ready code using LLMs, and returns structured output.                      |
+| 🔁 [`ollama-proxy`](./services/ollama-proxy)     | A smart router for LLM requests. Wraps Ollama calls with memory context, schema formats, and model selection logic. Designed to give your system LLM superpowers with centralized control.  |
+| 🛠️ [`guardian-cli`](./services/guardian-cli)    | A local-first CLI to interact with the Guardian server and trigger workflows like ingesting files, running blog or codegen pipelines, and managing memory. Lightweight and script-friendly. |
+
+> Each service runs independently and can be used standalone or together as a foundation for agentic automation workflows.
 
 ---
 
@@ -53,11 +56,17 @@ bun install -g ./services/guardian-cli
 
 Run this to get started:
 
+
 ```bash
-pnpm add axios ollama @qdrant/js-client-rest js-base64 @google/genai @notionhq/client postgres @supabase/supabase-js drizzle-orm
+git clone https://github.com/loveliiivelaugh/guardian-open.git
+```
+```bash
+cd guardian-open
 ```
 
-> Or use `npm` instead of `pnpm` if needed.
+```bash
+bun add axios ollama @qdrant/js-client-rest js-base64 @google/genai @notionhq/client postgres @supabase/supabase-js drizzle-orm
+```
 
 ---
 
@@ -85,7 +94,6 @@ guardian-open/
 
 ```ts
 import { runLLM, addMemory } from "./src/lib";
-import { qdrantClient } from "./config/clients";
 
 await addMemory({
   content: "Shipped Guardian Open v1.0",
@@ -142,28 +150,33 @@ Inside `/scripts/`:
 * `bootstrap.sh` → One-liner to install, run, and test everything
 
 ---
-Absolutely — here’s a polished `Included Services` section you can paste directly into your root `README.md`:
 
----
+### Qdrant Memory
+To set up the default memory collection in Qdrant
+🧙🏼‍♂️ Use this 👉
+```bash
+curl -X PUT http://localhost:6333/collections/memories \
+  -H "Content-Type: application/json" \
+  -d '{
+    "vectors": {
+      "size": 1024,
+      "distance": "Cosine"
+    }
+  }'
+```
 
-### 🧱 Included Services
-
-This project is a bundled OSS release of the core Guardian system — a modular, local-first AI infrastructure stack. It includes four key services, each designed to run independently or as part of a unified agentic automation engine.
-
-| Service                                          | Description                                                                                                                                                                                 |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🧠 [`guardian-open`](./src)                      | The main backend server. Handles memory creation, LLM routing, metadata storage, and API orchestration using Bun + Hono + Supabase + Qdrant.                                                |
-| ✍️ [`codegen-worker`](./services/codegen-worker) | A task-triggered microservice that receives input (like feature prompts or TDD test plans), generates production-ready code using LLMs, and returns structured output.                      |
-| 🔁 [`ollama-proxy`](./services/ollama-proxy)     | A smart router for LLM requests. Wraps Ollama calls with memory context, schema formats, and model selection logic. Designed to give your system LLM superpowers with centralized control.  |
-| 🛠️ [`guardian-cli`](./services/guardian-cli)    | A local-first CLI to interact with the Guardian server and trigger workflows like ingesting files, running blog or codegen pipelines, and managing memory. Lightweight and script-friendly. |
-
-> Each service runs independently and can be used standalone or together as a foundation for agentic automation workflows.
+### Guardian CLI
+To install the Guardian CLI
+🧙🏼‍♂️ Use this 👉
+```bash
+bun install -g ./services/guardian-cli
+```
 
 ---
 
 ### 🧩 Coming Soon
 
-* [ ] Guardian CLI installable via `pnpm dlx`
+* [x] Guardian CLI installable via `pnpm dlx`
 * [ ] Memory ingestion loop
 * [ ] UI walkthrough via blog
 * [ ] Minimal `AgentFlow` support
@@ -185,6 +198,3 @@ Built by [Michael Woodward](https://blog.woodwardwebdev.com)
 I build sovereign AI infrastructure using local-first tools and agentic pipelines.
 This repo is part of the Guardian AI ecosystem.
 
----
-
-Let me know if you'd like a `logo.svg`, social banner, or deployment badge added next!
