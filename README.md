@@ -11,6 +11,17 @@ Read the [full tutorial series](https://blog.woodwardwebdev.com/the-guardian-tut
 
 ---
 
+### 🚀 What is This?
+
+`guardian-open` is the open-source foundation of my agentic infrastructure system — a **self-hosted AI automation engine** built with LLMs, memory, pipelines, and real-time tooling. It’s designed to help developers:
+
+* Automate reasoning and task handling with `runLLM`
+* Store and retrieve memory with Qdrant + Supabase
+* Trigger actions via code, CLI, or agents
+* Build upon real infrastructure — not toy examples
+
+---
+
 ### 🧱 Included Services
 
 This project is a bundled OSS release of the core Guardian system — a modular, local-first AI infrastructure stack. It includes four key services, each designed to run independently or as part of a unified agentic automation engine.
@@ -26,32 +37,6 @@ This project is a bundled OSS release of the core Guardian system — a modular,
 
 ---
 
-### 🚀 What is This?
-
-`guardian-open` is the open-source foundation of my agentic infrastructure system — a **self-hosted AI automation engine** built with LLMs, memory, pipelines, and real-time tooling. It’s designed to help developers:
-
-* Automate reasoning and task handling with `runLLM`
-* Store and retrieve memory with Qdrant + Supabase
-* Trigger actions via code, CLI, or agents
-* Build upon real infrastructure — not toy examples
-
----
-
-### 🛠️ What’s Included
-
-| Feature             | Description                                                                                  |
-| ------------------- | -------------------------------------------------------------------------------------------- |
-| `runLLM.ts`         | Flexible LLM interface (local or API) using Ollama or Gemini                                 |
-| `addMemory.ts`      | Semantic memory logging via Qdrant + Supabase                                                |
-| `embed.ts`          | Embedding utility for text/vector conversion                                                 |
-| `logSystemEvent.ts` | Event logging and trace utility                                                              |
-| `clients.ts`        | Pre-wired HTTP clients for Notion, Slack, n8n, Supabase, WordPress, Home Assistant, and more |
-| `guardian-cli`      | WIP CLI for local automation                                                                 |
-| `ollama-proxy`      | Optional inference layer for model + memory injection                                        |
-| `codegen-worker`    | Experimental microservice for code generation pipelines                                      |
-
----
-
 ### 📦 Install Dependencies
 
 Run this to get started:
@@ -59,13 +44,9 @@ Run this to get started:
 
 ```bash
 git clone https://github.com/loveliiivelaugh/guardian-open.git
-```
-```bash
 cd guardian-open
-```
-
-```bash
-bun add axios ollama @qdrant/js-client-rest js-base64 @google/genai @notionhq/client postgres @supabase/supabase-js drizzle-orm
+bun install
+bun run dev
 ```
 
 ---
@@ -124,6 +105,7 @@ SUPABASE_URL=
 SUPABASE_SERVICE_ROLE=
 DATABASE_URL=postgres://...
 ```
+See how to set this up in the 👉 [Guardian Environment Setup]()
 
 ---
 
