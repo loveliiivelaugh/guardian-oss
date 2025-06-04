@@ -6,8 +6,9 @@
 
 ---
 
-Read [Getting Set Up]()
-Read the [full tutorial series](https://blog.woodwardwebdev.com/the-guardian-tutorial-series) for step-by-step guides on setting up and using Guardian.
+Read [Getting Set Up](https://blog.woodwardwebdev.com/post/getting-set-up-tools-i-use-to-power-my-stack)
+
+Read the [full tutorial series](https://blog.woodwardwebdev.com/post/the-guardian-tutorial-series) for step-by-step guides on setting up and using Guardian.
 
 ---
 
@@ -41,12 +42,23 @@ This project is a bundled OSS release of the core Guardian system — a modular,
 
 Run this to get started:
 
-
 ```bash
-git clone https://github.com/loveliiivelaugh/guardian-open.git
-cd guardian-open
+git clone https://github.com/loveliiivelaugh/guardian-oss.git
+cd guardian-oss
 bun install
-bun run dev
+docker compose up
+```
+This will install the dependencies and start all the services.
+
+* `guardian-open` - The main backend server. Handles memory creation, LLM routing, metadata storage, and API orchestration using Bun + Hono + Supabase + Qdrant. [port 9876]
+* `codegen-worker` - A task-triggered microservice that receives input (like feature prompts or TDD test plans), generates production-ready code using LLMs, and returns structured output. [port 3535]
+* `ollama-proxy` - A smart router for LLM requests. Wraps Ollama calls with memory context, schema formats, and model selection logic. Designed to give your system LLM superpowers with centralized control. [port 3456]
+
+### Guardian CLI
+To install the Guardian CLI
+🧙🏼‍♂️ Use this 👉
+```bash
+bun install -g ./services/guardian-cli
 ```
 
 ---
@@ -54,7 +66,7 @@ bun run dev
 ### 📁 Project Structure
 
 ```
-guardian-open/
+guardian-oss/
 ├── config/              # Shared client configs (LLMs, APIs, DB)
 ├── services/            # Optional local tools (CLI, codegen, LLM proxy)
 ├── src/
@@ -112,7 +124,7 @@ See how to set this up in the 👉 [Guardian Environment Setup]()
 ### 📚 Tutorials & Documentation
 
 All tutorials for this repo live on my blog:
-👉 [The Guardian Tutorial Series](https://blog.woodwardwebdev.com/the-guardian-tutorial-series)
+👉 [The Guardian Tutorial Series](https://blog.woodwardwebdev.com/post/the-guardian-tutorial-series)
 
 You’ll find step-by-step guides for:
 
@@ -145,13 +157,6 @@ curl -X PUT http://localhost:6333/collections/memories \
       "distance": "Cosine"
     }
   }'
-```
-
-### Guardian CLI
-To install the Guardian CLI
-🧙🏼‍♂️ Use this 👉
-```bash
-bun install -g ./services/guardian-cli
 ```
 
 ---
